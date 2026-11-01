@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>breus-ug | Sign Up</title>
+  <style>
+    :root{
+      --bg:#061a2d;
+      --bg-2:#0d2340;
+      --panel:#122d4d;
+      --line:rgba(164, 213, 255, 0.12);
+      --text:#edf8ff;
+      --muted:#cfe9ff;
+      --primary:#52c3ff;
+      --primary-2:#00a8ff;
+      --green:#3bd98c;
+      --shadow:0 18px 44px rgba(0,0,0,0.32);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin:0; min-height:100%; font-family: Arial, Helvetica, sans-serif; }
+    body{
+      min-height:100vh;
+      background: radial-gradient(circle at top left, rgba(82,195,255,0.16), transparent 28%), linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+      color:var(--text);
+      display:grid; place-items:center; padding:20px;
+    }
+
+    .auth-shell{
+      width:min(1100px, 100%);
+      background:linear-gradient(180deg, rgba(16, 45, 77, 0.9), rgba(7, 26, 45, 0.94));
+      border:1px solid var(--line);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      display:grid;
+      grid-template-columns:1.1fr 0.9fr;
+    }
+
+    .brand-side{
+      padding:36px 28px;
+      background:linear-gradient(180deg, rgba(82,195,255,0.08), rgba(0,0,0,0.1)), linear-gradient(135deg, rgba(11,30,49,0.9), rgba(13, 35, 64, 0.8));
+      border-right:1px solid var(--line);
+      position:relative;
+    }
+
+    .brand{
+      display:flex; align-items:center; gap:12px; font-weight:700; letter-spacing:0.06em; text-transform:lowercase; margin-bottom:30px;
+    }
+
+    .brand-mark{
+      width:44px; height:44px; border-radius:12px; display:grid; place-items:center; font-weight:900;
+      background:linear-gradient(135deg, var(--primary), var(--primary-2));
+      color:#021b2d;
+      box-shadow:0 12px 24px rgba(82,195,255,0.25);
+    }
+
+    .welcome-box{
+      margin-top:30px; padding:18px 20px; border:1px solid var(--line); border-radius:18px; background:rgba(255,255,255,0.02);
+    }
+
+    .welcome-box h1{
+      margin:0 0 10px; font-size:clamp(2.1rem, 3vw, 3.5rem); line-height:1.05; letter-spacing:-0.06em;
+    }
+
+    .welcome-box p{ margin:0; color:var(--muted); font-size:1rem; }
+
+    .feature-list{
+      margin-top:24px; display:grid; gap:12px;
+    }
+
+    .feature-item{
+      display:flex; align-items:center; gap:10px; color:var(--muted);
+      background:rgba(255,255,255,0.02); border:1px solid var(--line); border-radius:12px; padding:10px 12px; font-weight:600;
+    }
+
+    .dot{
+      width:10px; height:10px; border-radius:50%;
+      background:linear-gradient(135deg, var(--primary), var(--green));
+      box-shadow:0 0 18px rgba(82,195,255,0.5);
+    }
+
+    .form-side{ padding:36px 28px; display:flex; align-items:center; justify-content:center; }
+    .form-panel{ width:min(100%, 430px); }
+
+    .toptext{ margin-bottom:24px; }
+    .toptext h2{ margin:0 0 8px; font-size:2rem; letter-spacing:-0.05em; }
+    .toptext p{ margin:0; color:var(--muted); }
+
+    .field{
+      display:grid; gap:8px; margin-bottom:16px;
+    }
+    .field label{ color:var(--muted); font-size:0.8rem; font-weight:700; }
+    .field input{
+      width:100%; background:rgba(255,255,255,0.03); color:var(--text); border:1px solid var(--line);
+      border-radius:12px; padding:12px 14px; outline:none;
+    }
+    .field input:focus{
+      border-color:rgba(82,195,255,0.75);
+      box-shadow:0 0 0 3px rgba(82,195,255,0.12);
+    }
+
+    .verification-row{
+      display:flex; align-items:center; justify-content:space-between; gap:12px; border:1px solid var(--line);
+      background:rgba(255,255,255,0.02); border-radius:12px; padding:10px 12px; margin:8px 0 18px;
+    }
+
+    .code{ font-weight:900; letter-spacing:0.12em; color:#dff4ff; font-size:0.94rem; }
+
+    .mini-btn{
+      border:none; background:rgba(59,217,140,0.12); color:var(--green); border:1px solid rgba(59,217,140,0.3);
+      border-radius:10px; padding:8px 10px; cursor:pointer; font-weight:700;
+    }
+
+    .btn{
+      width:100%; border:none; cursor:pointer; border-radius:12px; padding:13px 16px; font-weight:800; transition:0.2s ease;
+    }
+    .btn:hover{ transform:translateY(-1px); }
+
+    .btn.primary{
+      background:linear-gradient(135deg, var(--primary), var(--primary-2));
+      color:#041d32;
+      box-shadow:0 12px 24px rgba(82,195,255,0.3);
+    }
+
+    .help{
+      margin-top:20px; text-align:center; color:var(--muted); font-size:0.9rem;
+    }
+    .help a{ color:#dff4ff; font-weight:700; text-decoration:none; }
+
+    .checkbox-row{
+      display:flex; align-items:center; gap:8px; color:var(--muted); font-size:0.84rem; margin-bottom:18px;
+    }
+
+    @media (max-width: 860px){
+      .auth-shell{ grid-template-columns:1fr; }
+      .brand-side{ border-right:none; border-bottom:1px solid var(--line); }
+    }
+  </style>
+</head>
+<body>
+  <div class="auth-shell">
+    <div class="brand-side">
+      <div class="brand">
+        <div class="brand-mark">B</div>
+        <span>breus-ug</span>
+      </div>
+
+      <div class="welcome-box">
+        <h1>Create account.</h1>
+        <p>Register with your phone number, password, referral code, and verification code to start earning.</p>
+      </div>
+
+      <div class="feature-list">
+        <div class="feature-item"><span class="dot"></span>Earn 15% from perfume investments</div>
+        <div class="feature-item"><span class="dot"></span>Get referral bonuses up to 25%</div>
+        <div class="feature-item"><span class="dot"></span>Track your team and daily returns</div>
+      </div>
+    </div>
+
+    <div class="form-side">
+      <div class="form-panel">
+        <div class="toptext">
+          <h2>Sign Up</h2>
+          <p>Start your breus-ug account today.</p>
+        </div>
+
+        <div class="field">
+          <label>Phone number</label>
+          <input type="tel" placeholder="+256 700 000000" />
+        </div>
+
+        <div class="field">
+          <label>Password</label>
+          <input type="password" placeholder="Create password" />
+        </div>
+
+        <div class="field">
+          <label>Confirm password</label>
+          <input type="password" placeholder="Confirm password" />
+        </div>
+
+        <div class="field">
+          <label>Referral code</label>
+          <input type="text" value="breus-ug-2026" readonly />
+        </div>
+
+        <div class="field">
+          <label>Verification code</label>
+          <div class="verification-row">
+            <span class="code" id="verificationCode">BR-1842</span>
+            <button class="mini-btn" type="button" id="copyCode">Copy</button>
+          </div>
+        </div>
+
+        <div class="checkbox-row">
+          <input type="checkbox" />
+          <span>I agree to the terms and conditions.</span>
+        </div>
+
+        <button class="btn primary" type="button">Create account</button>
+
+        <div class="help">
+          Already have an account? <a href="login.html">Login</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function generateCode() {
+      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+      let code = "BR-";
+      for (let i = 0; i < 4; i++) {
+        code += chars[Math.floor(Math.random() * chars.length)];
+      }
+      document.getElementById("verificationCode").textContent = code;
+    }
+
+    document.getElementById("copyCode").addEventListener("click", function() {
+      const code = document.getElementById("verificationCode").textContent;
+      const temp = document.createElement("textarea");
+      temp.value = code;
+      document.body.appendChild(temp);
+      temp.select();
+      document.execCommand("copy");
+      document.body.removeChild(temp);
+      alert("Copied: " + code);
+    });
+
+    generateCode();
+  </script>
+</body>
+</html>
